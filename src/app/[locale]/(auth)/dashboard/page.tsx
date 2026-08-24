@@ -1,7 +1,7 @@
-import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { PageMessage } from '@/features/dashboard/PageMessage';
+import { getFormatter, getTranslations, setRequestLocale } from 'next-intl/server';
 import { TitleBar } from '@/features/dashboard/TitleBar';
-import { SponsorLogos } from '@/features/sponsors/SponsorLogos';
+import { getOrganizationExpenseSummary } from '@/features/expenses/ExpenseQueries';
+import { Link } from '@/libs/I18nNavigation';
 
 export default async function DashboardIndexPage(props: {
   params: Promise<{ locale: string }>;
@@ -12,6 +12,11 @@ export default async function DashboardIndexPage(props: {
     locale,
     namespace: 'DashboardIndexPage',
   });
+  const format = await getFormatter();
+
+  // Tenant-scoped by `getExpenseTenant()`, the caller cannot widen the scope.
+  const summary = await getOrganizationExpenseSummary();
+  const topCategory = summary.byCategory[0];
 
   return (
     <>
@@ -20,70 +25,78 @@ export default async function DashboardIndexPage(props: {
         description={t('title_bar_description')}
       />
 
-      <PageMessage
-        icon={(
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M0 0h24v24H0z" stroke="none" />
-            <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3M12 12l8-4.5M12 12v9M12 12L4 7.5" />
-          </svg>
-        )}
-        title={t('message_state_title')}
-        description={t.rich('message_state_description', {
-          code: chunks => (
-            <code className="bg-secondary text-secondary-foreground">
-              {chunks}
-            </code>
-          ),
-        })}
-        button={(
-          <>
-            <div className="
-              mt-2 text-sm font-light whitespace-pre-wrap text-muted-foreground
-            "
-            >
-              {t.rich('message_state_alternative', {
-                url: () => (
-                  <a
-                    className="
-                      text-blue-500
-                      hover:text-blue-600
-                    "
-                    href="https://nextjs-boilerplate.com/pro-saas-starter-kit"
-                  >
-                    Next.js Boilerplate SaaS
-                  </a>
-                ),
-              })}
+      <div className="
+        grid grid-cols-1 gap-4
+        sm:grid-cols-3
+      "
+      >
+        <div className="rounded-md bg-card p-5">
+          <div className="text-sm font-medium text-muted-foreground">
+            {t('stat_total_label')}
+          </div>
+          <div className="mt-1 text-3xl font-bold">
+            {format.number(summary.totalAmount, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </div>
+        </div>
 
-              <p>
-                {t.rich('max_message', {
-                  url: () => (
-                    <a
-                      className="
-                        text-blue-500
-                        hover:text-blue-600
-                      "
-                      href="https://nextjs-boilerplate.com/nextjs-saas-starter-kit"
-                    >
-                      Next.js Boilerplate Plus
-                    </a>
-                  ),
-                })}
+        <div className="rounded-md bg-card p-5">
+          <div className="text-sm font-medium text-muted-foreground">
+            {t('stat_count_label')}
+          </div>
+          <div className="mt-1 text-3xl font-bold">{summary.count}</div>
+        </div>
+
+        <div className="rounded-md bg-card p-5">
+          <div className="text-sm font-medium text-muted-foreground">
+            {t('stat_top_category_label')}
+          </div>
+          <div className="mt-1 text-3xl font-bold">
+            {topCategory ? topCategory.category : '—'}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-6 rounded-md bg-card p-5">
+        <div className="text-lg font-semibold">{t('breakdown_title')}</div>
+
+        {summary.byCategory.length === 0
+          ? (
+              <p className="mt-3 text-sm font-medium text-muted-foreground">
+                {t('empty_state')}
               </p>
-            </div>
+            )
+          : (
+              <ul className="mt-4 flex flex-col gap-y-3">
+                {summary.byCategory.map(entry => (
+                  <li
+                    key={entry.category}
+                    className="flex items-center justify-between text-sm"
+                  >
+                    <span className="font-medium">{entry.category}</span>
+                    <span className="text-muted-foreground">
+                      {format.number(entry.amount, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
 
-            <div className="mt-7">
-              <SponsorLogos />
-            </div>
-          </>
-        )}
-      />
+        <Link
+          href="/dashboard/expenses"
+          className="
+            mt-5 inline-block text-sm font-semibold text-primary
+            hover:underline
+          "
+        >
+          {t('cta_view_expenses')}
+        </Link>
+      </div>
     </>
   );
 };

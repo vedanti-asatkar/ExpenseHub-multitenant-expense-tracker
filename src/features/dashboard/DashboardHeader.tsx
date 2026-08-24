@@ -15,6 +15,7 @@ export const DashboardHeader = (props: {
   menu: {
     href: string;
     label: string;
+    primary?: boolean;
   }[];
 }) => {
   const locale = useLocale();
@@ -43,7 +44,7 @@ export const DashboardHeader = (props: {
           >
             {props.menu.map(item => (
               <li key={item.href}>
-                <ActiveLink href={item.href}>{item.label}</ActiveLink>
+                <ActiveLink href={item.href} primary={item.primary}>{item.label}</ActiveLink>
               </li>
             ))}
           </ul>

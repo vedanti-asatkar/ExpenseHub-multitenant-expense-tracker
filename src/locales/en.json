@@ -1,13 +1,12 @@
 {
   "Index": {
-    "meta_title": "SaaS Template - The perfect SaaS template to build and scale your business with ease.",
-    "meta_description": "A free and open-source landing page template for your SaaS business, built with React, TypeScript, Shadcn UI, and Tailwind CSS."
+    "meta_title": "ExpenseHub - Multi-tenant expense tracking for growing organizations.",
+    "meta_description": "Track, categorize, and report on organizational spend with complete data isolation between teams. Built with Next.js, TypeScript, and Clerk."
   },
   "Navbar": {
     "sign_in": "Sign in",
     "sign_up": "Sign up",
     "product": "Product",
-    "pricing": "Pricing",
     "docs": "Docs",
     "blog": "Blog",
     "about": "About"
@@ -16,28 +15,33 @@
     "button_label": "Change language"
   },
   "Hero": {
-    "follow_twitter": "Follow @Ixartz on Twitter",
-    "title": "The perfect <important>SaaS template</important> to build and scale your business with ease.",
-    "description": "A free and open-source landing page template for your SaaS business, built with React, TypeScript, Shadcn UI, and Tailwind CSS.",
-    "primary_button": "Get Next.js SaaS Starter Kit",
-    "secondary_button": "Star on GitHub"
+    "banner": "Built for multi-tenant organizations",
+    "title": "Expense tracking your <important>whole organization</important> can trust.",
+    "description": "ExpenseHub gives every organization its own isolated workspace for tracking spend — team members log expenses, admins see the full picture, and no organization ever sees another's data.",
+    "primary_button": "Get started free",
+    "secondary_button": "Sign in"
   },
   "Features": {
-    "section_subtitle": "Features",
-    "section_title": "Unlock the Full Potential of the SaaS Template",
-    "section_description": "A free and open-source landing page template for your SaaS business, built with React, TypeScript, Shadcn UI, and Tailwind CSS.",
-    "feature1_title": "Node.js",
-    "feature2_title": "React",
-    "feature3_title": "Tailwind CSS",
-    "feature4_title": "TypeScript",
-    "feature5_title": "Shadcn UI",
-    "feature6_title": "ESLint",
-    "feature_description": "A free and open-source landing page template for your SaaS business, built with React, TypeScript, Shadcn UI, and Tailwind CSS."
+    "section_subtitle": "Why ExpenseHub",
+    "section_title": "Built for organizations, not just individuals",
+    "section_description": "Every feature is designed around one principle: your organization's financial data stays yours, and only yours.",
+    "feature1_title": "Multi-tenant data isolation",
+    "feature1_description": "Every expense is scoped to an organization at the database level, so one team can never see another's spending.",
+    "feature2_title": "Organization-based tracking",
+    "feature2_description": "Expenses are logged against your organization, not a single user, so the full team stays in sync automatically.",
+    "feature3_title": "Role-based access",
+    "feature3_description": "Clerk-powered roles decide who can add expenses and who manages the organization, right out of the box.",
+    "feature4_title": "Real-time spending insights",
+    "feature4_description": "See this month's total, expense count, and category breakdown the moment you open your dashboard.",
+    "feature5_title": "Category breakdown",
+    "feature5_description": "Group spend by category to spot trends before they become a problem.",
+    "feature6_title": "Secure by design",
+    "feature6_description": "Authentication and organization membership are handled by Clerk, so access control is never an afterthought."
   },
   "Pricing": {
     "section_subtitle": "Pricing",
-    "section_title": "Unlock the Full Potential of the SaaS Template",
-    "section_description": "A free and open-source landing page template for your SaaS business, built with React, TypeScript, Shadcn UI, and Tailwind CSS.",
+    "section_title": "Plans that grow with your organization",
+    "section_description": "Start free, and upgrade as your organization tracks more expenses.",
     "button_text": "Get started"
   },
   "PricingPlans": {
@@ -66,17 +70,26 @@
     "sentry_logo": "Sentry logo",
     "crowdin_logo": "Crowdin logo",
     "arcjet_logo": "Arcjet logo",
-    "coderabbit_logo": "CodeRabbit logo",
-    "nextjs_boilerplate_logo": "Next.js SaaS Boilerplate logo"
+    "coderabbit_logo": "CodeRabbit logo"
   },
   "FAQ": {
-    "question": "Lorem ipsum dolor sit amet, consectetur adipiscing elit?",
-    "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam aliquam enim dui, id consequat turpis ullamcorper ac. Mauris id quam dolor. Nullam eu egestas turpis. Proin risus elit, sollicitudin in mi a, accumsan euismod turpis. In euismod mi sed diam tristique hendrerit."
+    "question_1": "How does ExpenseHub keep my organization's data separate from others?",
+    "answer_1": "Every expense record is tagged with an organization ID that comes from your authenticated session, never from user input, and every database query is filtered by it. Organizations can never read or write each other's data.",
+    "question_2": "Can more than one person in my organization track expenses?",
+    "answer_2": "Yes. Any member of your organization can add expenses, and everyone sees the same shared, up-to-date list scoped to that organization.",
+    "question_3": "Do I need a credit card to try ExpenseHub?",
+    "answer_3": "No. You can create an organization and start tracking expenses right away.",
+    "question_4": "What information do I need to log an expense?",
+    "answer_4": "Just an amount, a category, and a date. A description is optional.",
+    "question_5": "Can I see spending broken down by category?",
+    "answer_5": "Yes. Your dashboard shows a monthly total, expense count, and a breakdown by category as soon as you sign in.",
+    "question_6": "How is authentication handled?",
+    "answer_6": "ExpenseHub uses Clerk for authentication and organization management, so sign-in, invitations, and roles are handled securely out of the box."
   },
   "CTA": {
-    "title": "You are ready?",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "button_text": "Get Next.js SaaS Starter Kit"
+    "title": "Ready to see where your organization's money goes?",
+    "description": "Create an organization and start tracking expenses in minutes.",
+    "button_text": "Get started free"
   },
   "Footer": {
     "product": "Product",
@@ -86,7 +99,7 @@
     "company": "Company",
     "terms_of_service": "Terms Of Service",
     "privacy_policy": "Privacy Policy",
-    "footer_text": "© {year} {name}. Made with <author></author>."
+    "footer_text": "© {year} {name}. All rights reserved."
   },
   "SignIn": {
     "meta_title": "Sign in",
@@ -97,20 +110,22 @@
     "meta_description": "Effortlessly create an account through our intuitive sign-up process."
   },
   "DashboardLayout": {
-    "meta_title": "SaaS Template Dashboard",
-    "meta_description": "A free and open-source landing page template for your SaaS business, built with Next.js, TypeScript, Shadcn UI, and Tailwind CSS.",
+    "meta_title": "ExpenseHub Dashboard",
+    "meta_description": "Track and manage your organization's expenses in one place.",
     "home": "Home",
     "expenses": "Expenses",
     "members": "Members",
     "settings": "Settings"
   },
   "DashboardIndexPage": {
-    "title_bar": "Dashboard",
-    "title_bar_description": "Welcome to your dashboard",
-    "message_state_title": "Let's get started",
-    "message_state_description": "Customize this page by editing the file at <code>dashboard/page.tsx</code>.",
-    "message_state_alternative": "Need advanced features? Next.js 16 & React 19, Multi-tenancy & Teams, Roles & Permissions, Shadcn UI,\nEnd-to-End Typesafety with oRPC, Stripe Payment, Light / Dark mode. Try <url></url>.",
-    "max_message": "Or, need a Self-hosted auth stack (Better Auth)? Try <url></url>."
+    "title_bar": "Overview",
+    "title_bar_description": "Your organization's spending at a glance",
+    "stat_total_label": "Total this month",
+    "stat_count_label": "Expenses this month",
+    "stat_top_category_label": "Top category",
+    "breakdown_title": "Spending by category",
+    "empty_state": "No expenses recorded yet this month.",
+    "cta_view_expenses": "View all expenses →"
   },
   "ExpensesPage": {
     "title_bar": "Expenses",

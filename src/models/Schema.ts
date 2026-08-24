@@ -11,7 +11,6 @@ import { index, numeric, pgTable, serial, text, timestamp } from 'drizzle-orm/pg
 // Alternatively, if your database is running, you can run `npm run db:migrate` and there is no need to restart the server.
 
 // Need a database for production? Check out https://get.neon.com/BMFYNtx
-// Tested and compatible with SaaS Boilerplate
 
 export const todoSchema = pgTable('todo', {
   id: serial('id').primaryKey(),

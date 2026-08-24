@@ -1,5 +1,5 @@
 import type { CreateExpenseInput } from './ExpenseValidation';
-import { desc, eq } from 'drizzle-orm';
+import { and, desc, eq, gte, lt } from 'drizzle-orm';
 import { db } from '@/libs/DB';
 import { expenseSchema } from '@/models/Schema';
 import { getExpenseTenant } from './ExpenseTenant';
@@ -43,4 +43,64 @@ export const insertOrganizationExpense = async (input: CreateExpenseInput) => {
     .returning();
 
   return expense;
+};
+
+export type ExpenseCategoryTotal = {
+  category: string;
+  amount: number;
+};
+
+export type ExpenseMonthSummary = {
+  totalAmount: number;
+  count: number;
+  byCategory: ExpenseCategoryTotal[];
+};
+
+/**
+ * Summarizes the caller's organization expenses for the current calendar month.
+ *
+ * Scoped the same way as `getOrganizationExpenses`: the `organizationId`
+ * filter comes from the Clerk session, so the aggregate can never mix in
+ * another tenant's data.
+ * @returns The current month's total amount, expense count, and per-category totals.
+ */
+export const getOrganizationExpenseSummary = async (): Promise<ExpenseMonthSummary> => {
+  const { organizationId } = await getExpenseTenant();
+
+  const now = new Date();
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const startOfNextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+
+  const monthExpenses = await db
+    .select()
+    .from(expenseSchema)
+    .where(
+      and(
+        eq(expenseSchema.organizationId, organizationId),
+        gte(expenseSchema.date, startOfMonth),
+        lt(expenseSchema.date, startOfNextMonth),
+      ),
+    );
+
+  const totalsByCategory = new Map<string, number>();
+  let totalAmount = 0;
+
+  for (const expense of monthExpenses) {
+    const amount = Number(expense.amount);
+    totalAmount += amount;
+    totalsByCategory.set(
+      expense.category,
+      (totalsByCategory.get(expense.category) ?? 0) + amount,
+    );
+  }
+
+  const byCategory = [...totalsByCategory.entries()]
+    .map(([category, amount]) => ({ category, amount }))
+    .sort((a, b) => b.amount - a.amount);
+
+  return {
+    totalAmount,
+    count: monthExpenses.length,
+    byCategory,
+  };
 };

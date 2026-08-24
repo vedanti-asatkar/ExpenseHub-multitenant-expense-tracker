@@ -39,12 +39,13 @@ export default async function DashboardLayout(props: DashboardLayoutProps) {
           <DashboardHeader
             menu={[
               {
-                href: '/dashboard',
-                label: t('home'),
-              },
-              {
                 href: '/dashboard/expenses',
                 label: t('expenses'),
+                primary: true,
+              },
+              {
+                href: '/dashboard',
+                label: t('home'),
               },
               {
                 href: '/dashboard/organization-profile/organization-members',
