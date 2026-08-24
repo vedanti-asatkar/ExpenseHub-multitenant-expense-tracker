@@ -100,6 +100,7 @@
     "meta_title": "Tableau de bord du SaaS Template",
     "meta_description": "Un template gratuit et open-source de landing page pour votre entreprise SaaS, construit avec Next.js, TypeScript, Shadcn UI et Tailwind CSS.",
     "home": "Accueil",
+    "expenses": "Dépenses",
     "members": "Membres",
     "settings": "Réglages"
   },
@@ -110,6 +111,27 @@
     "message_state_description": "Personnalisez cette page en modifiant le fichier dans <code>dashboard/page.tsx</code>.",
     "message_state_alternative": "Besoin de fonctionnalités avancées ? Next.js 16 & React 19, Multi-tenancy & Équipes, Rôles & Permissions, Shadcn UI,\nTypesafety de bout en bout avec oRPC, Paiement Stripe, Mode clair / sombre. Essayez <url></url>.",
     "max_message": "Ou, besoin d'une stack d'auth auto-hébergée (Better Auth) ? Essayez <url></url>."
+  },
+  "ExpensesPage": {
+    "title_bar": "Dépenses",
+    "title_bar_description": "Suivez les dépenses de votre organisation",
+    "form_title": "Ajouter une dépense",
+    "form_amount_label": "Montant",
+    "form_amount_placeholder": "0,00",
+    "form_category_label": "Catégorie",
+    "form_category_placeholder": "Voyage, Logiciel, ...",
+    "form_date_label": "Date",
+    "form_description_label": "Description",
+    "form_description_placeholder": "Facultatif",
+    "form_submit": "Ajouter la dépense",
+    "form_submitting": "Ajout en cours...",
+    "form_success": "Dépense ajoutée.",
+    "form_error": "La dépense n'a pas pu être ajoutée. Vérifiez les champs et réessayez.",
+    "empty_state": "Aucune dépense enregistrée pour cette organisation.",
+    "table_date": "Date",
+    "table_category": "Catégorie",
+    "table_description": "Description",
+    "table_amount": "Montant"
   },
   "UserProfilePage": {
     "title_bar": "Profil utilisateur",

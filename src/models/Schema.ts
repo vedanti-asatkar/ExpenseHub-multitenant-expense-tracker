@@ -1,4 +1,4 @@
-import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
+import { index, numeric, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 
 // This file defines the structure of your database tables using the Drizzle ORM.
 
@@ -24,3 +24,19 @@ export const todoSchema = pgTable('todo', {
     .notNull(),
   createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),
 });
+
+// Multi-tenant table: every row belongs to exactly one Clerk organization.
+// `organization_id` MUST be part of every query touching this table, see
+// `src/features/expenses/ExpenseQueries.ts` for the tenant-scoped accessors.
+export const expenseSchema = pgTable('expense', {
+  id: serial('id').primaryKey(),
+  organizationId: text('organization_id').notNull(),
+  ownerId: text('owner_id').notNull(),
+  amount: numeric('amount', { precision: 12, scale: 2 }).notNull(),
+  category: text('category').notNull(),
+  description: text('description'),
+  date: timestamp('date', { mode: 'date' }).notNull(),
+  createdAt: timestamp('created_at', { mode: 'date' }).defaultNow().notNull(),
+}, table => [
+  index('expense_organization_id_idx').on(table.organizationId),
+]);
