@@ -45,7 +45,7 @@ export const insertOrganizationExpense = async (input: CreateExpenseInput) => {
   return expense;
 };
 
-export type ExpenseCategoryTotal = {
+type ExpenseCategoryTotal = {
   category: string;
   amount: number;
 };
